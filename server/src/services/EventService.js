@@ -1,6 +1,12 @@
 import { dbContext } from "../db/DbContext.js";
 
 class EventService {
+  async cancelEvent(eventId) {
+    const event = await this.getEventById(eventId)
+    event.isCanceled = !event.isCanceled
+    await event.save()
+    return event
+  }
   async updateEvent(eventId, eventData, userInfo) {
     const eventToUpdate = await this.getEventById(eventId)
 
