@@ -1,8 +1,29 @@
 <script setup>
+import { AppState } from '@/AppState.js';
+import { eventService } from '@/services/EventService.js';
+import { Pop } from '@/utils/Pop.js';
+import { computed, onMounted } from 'vue';
+import { EventModel } from "@/models/Event.js";
+import EventCard from '@/components/EventCard.vue';
 
+const events = computed(() => AppState.events)
+onMounted(() => {
+  getEvents()
+})
+// defineProps({
+//   eventProp: { type: Event, required: true }
+// })
+async function getEvents() {
+  try {
+    await eventService.getEvents()
+  }
+  catch (error) {
+    Pop.error(error);
+  }
+}
 
 </script>
-
+//TODO - Add a font//
 <template>
   <section class="container-fluid">
     <div class="row">
@@ -87,21 +108,10 @@
           </div>
         </div>
         <div class="container mt-5">
-          <div class="row text-center">
-            <div class="col-4">
-              <div class="card">
-                <p>inject card here</p>
-              </div>
-            </div>
-            <div class="col-4">
-              <div class="card">
-                <p>inject card here</p>
-              </div>
-            </div>
-            <div class="col-4">
-              <div class="card">
-                <p>inject card here</p>
-              </div>
+          <div class="row">
+            <div v-for="event in events" :key="event.id" class="col-4 text-center">
+              <EventCard :eventProp="event" />
+              <p></p>
             </div>
           </div>
         </div>
