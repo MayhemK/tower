@@ -4,12 +4,16 @@ import { logger } from "@/utils/Logger.js"
 import {EventModel } from "@/models/Event.js"
 
 class EventService{
+  async getEventById(eventId) {
+    const response = await api.get(`api/events/${eventId}`)
+    const event = new EventModel(response.data)
+    AppState.activeEvent = event
+    logger.log('event id', event)
+  }
   async getEvents() {
 const response = await api.get('api/events')
-logger.log('events', response)
 const events = response.data.map(pojo => new EventModel(pojo))
 AppState.events = events
-logger.log('event pojo', events)
   }
 
 }

@@ -2,11 +2,46 @@
 import { AppState } from '@/AppState.js';
 import { eventService } from '@/services/EventService.js';
 import { Pop } from '@/utils/Pop.js';
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { EventModel } from "@/models/Event.js";
 import EventCard from '@/components/EventCard.vue';
 
-const events = computed(() => AppState.events)
+const events = computed(() => {
+  if (filterCategory.value == 'all') {
+    return AppState.events
+  }
+  return AppState.events.filter(event => event.type == filterCategory.value)
+})
+const filterCategory = ref('all')
+const categories = [
+  {
+    name: 'all',
+    icon: '♾️',
+    backgroundImg: 'https://images.unsplash.com/photo-1608178398319-48f814d0750c?q=80&w=1158&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+  },
+  {
+    name: 'concert',
+    icon: '🎸',
+    backgroundImg: 'https://images.unsplash.com/photo-1567942712661-82b9b407abbf?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+  },
+  {
+    name: 'convention',
+    icon: '👥',
+    backgroundImg: 'https://images.unsplash.com/photo-1560964598-dee5d2b9dd6b?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+  },
+  {
+    name: 'sport',
+    icon: '⚽',
+    backgroundImg: 'https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?q=80&w=1307&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+  },
+  {
+    name: 'digital',
+    icon: '💻',
+    backgroundImg: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1172&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+  },
+]
+
+
 onMounted(() => {
   getEvents()
 })
@@ -72,37 +107,14 @@ async function getEvents() {
   <div class="container fw-bold fs-3">Explore top categories</div>
   <section class="container">
     <div class="row justify-content-center">
-      <div class="col-10">
+      <div class="col-12">
         <div class="container">
-          <div class="row justify-content-around text-center">
-            <div class="col-2">
-              <div class="card">
-                <div>♾️</div>
-                <p>ALL</p>
-              </div>
-            </div>
-            <div class="col-2">
-              <div class="card">
-                <div>🎸</div>
-                <p>CONCERTS</p>
-              </div>
-            </div>
-            <div class="col-2">
-              <div class="card">
-                <div>👥</div>
-                <p>CONVENTION</p>
-              </div>
-            </div>
-            <div class="col-2">
-              <div class="card">
-                <div>⚽</div>
-                <p>SPORTS</p>
-              </div>
-            </div>
-            <div class="col-2">
-              <div class="card">
-                <div>💻</div>
-                <p>DIGITAL</p>
+          <div class="row justify-content-between text-center text-light">
+            <div v-for="category in categories" :key="category.name" class="col-2">
+              <div @click="filterCategory = category.name" class="fw-bold p-4 category-button"
+                :style="{ backgroundImage: `url(${category.backgroundImg})` }" role="button">
+                <div class="fs-2">{{ category.icon }}</div>
+                <div class="text-capitalize">{{ category.name }}</div>
               </div>
             </div>
           </div>
@@ -131,7 +143,17 @@ async function getEvents() {
   height: 200px;
 }
 
+.category-button {
+  background-size: cover;
+  background-position: center;
+
+}
+
 .card {
   background-color: #fcc3a29b;
+}
+
+.text-light {
+  text-shadow: 2px 2px 2px black;
 }
 </style>
