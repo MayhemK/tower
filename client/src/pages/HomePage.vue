@@ -96,7 +96,8 @@ async function getEvents() {
                 <p class="fw-bold fs-5">Start an event and invite your friends</p>
                 <hr>
                 <p>Create your own Tower event</p>
-                <p class="fs-bold fs-5 text-success" type="button">Create an Event</p>
+                <p class="fs-bold fs-5 text-success modal-dialog modal-dialog-centered" type="button">Create an Event
+                </p>
               </div>
             </div>
           </div>
