@@ -16,27 +16,29 @@
   </section>
   <div class="container fw-bold fs-3">How Tower Works</div>
   <section class="container">
-    <div class="row justify-content-center ">
-      <div class="col-4">
+    <div class="row justify-content-center align-items-stretch grid">
+      <div class="col-5">
         <div class="card">
           <div class="container">
-            <div class="row">
+            <div class="row grid">
               <div class="col-3 text-success fs-2">🔍</div>
               <div class="col-9">
                 <p class="fw-bold fs-5">Discover events you are interested in</p>
+                <hr>
                 <p>Browse through community hosted events for all the things you love</p>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-4">
+      <div class="col-5 ">
         <div class="card">
           <div class="container">
-            <div class="row">
+            <div class="row grid">
               <div class="col-3 text-success fs-2">➕</div>
               <div class="col-9">
-                <p class="fw-bold fs-5">Start and event and invite your friends</p>
+                <p class="fw-bold fs-5">Start an event and invite your friends</p>
+                <hr>
                 <p>Create your own Tower event</p>
                 <p class="fs-bold fs-5 text-success" type="button">Create an Event</p>
               </div>
@@ -48,9 +50,61 @@
   </section>
   <div class="container fw-bold fs-3">Explore top categories</div>
   <section class="container">
-    <div class="row">
-      <div class="col-6">
-
+    <div class="row justify-content-center">
+      <div class="col-10">
+        <div class="container">
+          <div class="row justify-content-around text-center">
+            <div class="col-2">
+              <div class="card">
+                <div>♾️</div>
+                <p>ALL</p>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="card">
+                <div>🎸</div>
+                <p>CONCERTS</p>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="card">
+                <div>👥</div>
+                <p>CONVENTION</p>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="card">
+                <div>⚽</div>
+                <p>SPORTS</p>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="card">
+                <div>💻</div>
+                <p>DIGITAL</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container mt-5">
+          <div class="row text-center">
+            <div class="col-4">
+              <div class="card">
+                <p>inject card here</p>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="card">
+                <p>inject card here</p>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="card">
+                <p>inject card here</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -61,5 +115,13 @@
   background-image: url(https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
   background-size: cover;
   min-height: 60dvh;
+}
+
+.grid {
+  height: 200px;
+}
+
+.card {
+  background-color: #fcc3a29b;
 }
 </style>
