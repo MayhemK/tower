@@ -8,6 +8,7 @@ export class EventModel {
     this.location = data.location
     this.capacity = data.capacity
     this.startDate = data.startDate
+    this.type = data.type
     this.isCanceled = data.isCanceled
     this.createdAt = data.createdAt
     this.updatedAt = data.updatedAt

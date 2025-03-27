@@ -14,10 +14,11 @@ defineProps({
 
     <div class="card">
       <img :src="eventProp.coverImg" alt="">
-      <p>{{ eventProp.name }}</p>
-      <p>Hosted by {{ eventProp.creatorId }}</p>
-      <p>{{ new Date(eventProp.startDate).toLocaleString() }}</p>
-      <p>Attending</p>
+      <div class="fw-bold ">{{ eventProp.name }}</div>
+      <div class="text-capitalize">Type: {{ eventProp.type }}</div>
+      <div class="text-success">Hosted by {{ eventProp.creatorId }}</div>
+      <div>{{ new Date(eventProp.startDate).toLocaleString() }}</div>
+      <div>X/{{ eventProp.capacity }} Attending</div>
     </div>
 
 
@@ -27,5 +28,13 @@ defineProps({
 
 
 <style lang="scss" scoped>
-.component {}
+.card {
+  background-color: #fcc3a29b;
+}
+
+img {
+  width: 100%;
+  height: 10dvh;
+  object-fit: cover;
+}
 </style>
