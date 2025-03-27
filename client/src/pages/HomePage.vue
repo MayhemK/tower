@@ -5,7 +5,8 @@ import { Pop } from '@/utils/Pop.js';
 import { computed, onMounted, ref } from 'vue';
 import { EventModel } from "@/models/Event.js";
 import EventCard from '@/components/EventCard.vue';
-
+import ModalComponent from '@/components/ModalComponent.vue';
+const account = computed(() => AppState.account)
 const events = computed(() => {
   if (filterCategory.value == 'all') {
     return AppState.events
@@ -96,8 +97,12 @@ async function getEvents() {
                 <p class="fw-bold fs-5">Start an event and invite your friends</p>
                 <hr>
                 <p>Create your own Tower event</p>
-                <p class="fs-bold fs-5 text-success modal-dialog modal-dialog-centered" type="button">Create an Event
-                </p>
+                <div v-if="account">
+                  <div class="fs-bold fs-5 text-success" type="button" data-bs-toggle="modal"
+                    data-bs-target="#createModal">Create an Event
+                  </div>
+                </div>
+                <div v-else>Log in to create an Event</div>
               </div>
             </div>
           </div>
@@ -131,6 +136,11 @@ async function getEvents() {
       </div>
     </div>
   </section>
+
+
+
+
+  <ModalComponent />
 </template>
 
 <style scoped lang="scss">
