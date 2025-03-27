@@ -5,10 +5,13 @@ import {EventModel } from "@/models/Event.js"
 
 class EventService{
   async getEventById(eventId) {
+    AppState.activeEvent = null
     const response = await api.get(`api/events/${eventId}`)
     const event = new EventModel(response.data)
+
     AppState.activeEvent = event
-    logger.log('event id', event)
+
+
   }
   async getEvents() {
 const response = await api.get('api/events')

@@ -12,8 +12,9 @@ onMounted(() => {
 
 async function getEventById() {
   try {
-    const eventId = route.params.getEventById
+    const eventId = route.params.eventId
     await eventService.getEventById(eventId)
+
   }
   catch (error) {
     Pop.error('ERROR IS HERE', error);
@@ -24,13 +25,61 @@ async function getEventById() {
 
 
 <template>
-  <section class="container">
-    <div class="row">
-      <div class="col-12">
-        POTATO
+  <div v-if="event">
+    <section class="container">
+      <div class="row">
+        <div class="col-12">
+          <img :src="event.coverImg" alt="">
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-8">
+              <div>
+                <div>{{ event.name }} {{ event.type }}</div>
+                <div>{{ event.description }}</div>
+                <div>Start Date: <p>{{ event.startDate }}</p>
+                </div>
+                <div>Location: <p>{{ event.location }}</p>
+                </div>
+              </div>
+              <div>
+                <div>See what folks are saying...</div>
+                <div class="card">
+                  <div>join the conversation</div>
+                  <div>TEXT BOX</div>
+                  <button>BUTTON</button>
+                  <div>COMMENT COMP</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="card">
+                <div>Interested in going?</div>
+                <div>Grab a ticket!</div>
+                <button>Attend</button>
+              </div>
+              <div>X spots left</div>
+              <div>
+                <div>Attendees</div>
+                <div class="card">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-12">
+                        <div>v-for attendees</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
+  <div v-else>
+    <h1>Loading... <i class="mdi mdi-loading mdi-spin"></i></h1>
+  </div>
 </template>
 
 

@@ -14,7 +14,6 @@ defineProps({
     <RouterLink :to="{ name: 'EventDetails', params: { eventId: eventProp.id } }"
       :title="`Go to the ${eventProp.name} page`">
       <div class="card">
-        <p>{{ eventProp.id }}</p>
         <img :src="eventProp.coverImg" alt="">
         <div class="fw-bold ">{{ eventProp.name }}</div>
         <div class="text-capitalize">Type: {{ eventProp.type }}</div>
