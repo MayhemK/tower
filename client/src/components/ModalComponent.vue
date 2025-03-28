@@ -16,9 +16,9 @@ import EventForm from './EventForm.vue';
         <div class="modal-body">
           <EventForm />
         </div>
-        <div class="modal-footer">
+        <!-- <div class="modal-footer">
           <button type="submit" class="btn btn-success">Create</button>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

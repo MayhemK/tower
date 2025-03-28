@@ -9,6 +9,19 @@ const route = useRoute()
 onMounted(() => {
   getEventById()
 })
+async function cancelEvent() {
+  try {
+    const confirmed = await Pop.confirm(`Are you sure you want to cancel ${event.value.name}?`)
+    if (!confirmed) {
+      return
+    }
+    const eventId = route.params.eventId
+    await eventService.cancelEvent(eventId)
+  }
+  catch (error) {
+    Pop.error(error);
+  }
+}
 
 async function getEventById() {
   try {
@@ -35,9 +48,13 @@ async function getEventById() {
           <div class="row">
             <div class="col-8">
               <div>
+                <div class="text-end">
+                  <buton class="btn btn-secondary"></buton>
+                </div>
                 <div>{{ event.name }} {{ event.type }}</div>
                 <div>{{ event.description }}</div>
-                <div>Start Date: <p>{{ event.startDate }}</p>
+                <div v-if="event.isCanceled"> This event has been Cancelled</div>
+                <div v-else>Start Date: <p>{{ new Date(event.startDate).toLocaleString() }}</p>
                 </div>
                 <div>Location: <p>{{ event.location }}</p>
                 </div>

@@ -4,8 +4,15 @@ import { logger } from "@/utils/Logger.js"
 import {EventModel } from "@/models/Event.js"
 
 class EventService{
+  async cancelEvent(eventId) {
+    const response = await api.delete(`api/events/${eventId}`)
+    const event = new Event(response.data)
+    AppState.activeEvent = event
+  }
   async createEvent(eventData) {
 const response = await api.get('api/events', eventData)
+const event = new EventModel(response.data)
+AppState.events.unshift(event)
   }
   async getEventById(eventId) {
     AppState.activeEvent = null
