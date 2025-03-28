@@ -16,7 +16,7 @@ export class EventController extends BaseController {
       .put('/:eventId', this.updateEvent)
       .delete('/:eventId', this.cancelEvent)
   }
-  getTicketsByEventId(request, response, next) {
+  async getTicketsByEventId(request, response, next) {
     try {
       const eventId = request.params.eventId
       const tickets = await ticketsService.getTicketsByEventId(eventId)
