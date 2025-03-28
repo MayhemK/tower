@@ -24,7 +24,7 @@ class EventService {
     return event
   }
   async getAllEvents() {
-    const events = await dbContext.Events.find().populate('creator', ' name picture').sort('-createdAt')
+    const events = await dbContext.Events.find().populate('creator', ' name picture').populate('ticketCount').sort('-createdAt')
     return events
   }
   async createEvent(eventData) {

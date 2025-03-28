@@ -24,3 +24,11 @@ EventSchema.virtual('creator', {
   ref: 'Account',
   justOne: true
 })
+
+EventSchema.virtual('ticketCount', {
+  localField: '_id',
+  ref: 'Ticket',
+  foreignField: 'eventId',
+  justOne: false,
+  count: true
+})
