@@ -7,7 +7,7 @@ import { router } from "@/router.js"
 class EventService{
   async cancelEvent(eventId) {
     const response = await api.delete(`api/events/${eventId}`)
-    const event = new Event(response.data)
+    const event = new EventModel(response.data)
     AppState.activeEvent = event
   }
   async createEvent(eventData) {

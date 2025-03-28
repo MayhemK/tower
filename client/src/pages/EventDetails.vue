@@ -56,17 +56,19 @@ async function getEventById() {
                 </div>
                 <div class="fw-bold fs-3">{{ event.name }} <span class="fw-normal fs-5 ">{{ event.type }}</span></div>
                 <div class="fs-4">{{ event.description }}</div>
-                <div v-if="event.isCanceled" class="text-danger text-decoration-underline fw-bold fs-2"> This event has
-                  been
-                  Cancelled</div>
+                <div v-if="event.isCanceled"
+                  class=" text-center my-5 text-danger text-decoration-underline fw-bold fs-2">
+                  This
+                  event has
+                  been Cancelled</div>
                 <div v-else class="fw-bold">Start Date: <p class="fw-normal">{{ new
                   Date(event.startDate).toLocaleString() }}</p>
-                </div>
-                <div class="fw-bold fs-4">Location: <p class="fw-normal fs-5">{{ event.location }}</p>
+                  <div class="fw-bold fs-4">Location: <p class="fw-normal fs-5">{{ event.location }}</p>
+                  </div>
                 </div>
               </div>
               <div>
-                <div>See what folks are saying...</div>
+                <div class="mt-5">See what folks are saying...</div>
                 <div class="card">
                   <div>join the conversation</div>
                   <div>TEXT BOX</div>
