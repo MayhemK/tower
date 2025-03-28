@@ -4,6 +4,7 @@ import { eventService } from '@/services/EventService.js'
 import { Pop } from '@/utils/Pop.js'
 import { computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
+const account = computed(() => AppState.account)
 const event = computed(() => AppState.activeEvent)
 const route = useRoute()
 onMounted(() => {
@@ -49,7 +50,9 @@ async function getEventById() {
             <div class="col-8">
               <div>
                 <div class="text-end">
-                  <buton class="btn btn-secondary"></buton>
+                  <button class="btn btn-secondary">Edit</button>
+                  <button @onclick="cancelEvent()" v-if="event.creatorId == account?.id"
+                    class="btn btn-warning">Cancel</button>
                 </div>
                 <div>{{ event.name }} {{ event.type }}</div>
                 <div>{{ event.description }}</div>

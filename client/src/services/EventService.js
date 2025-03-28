@@ -10,7 +10,7 @@ class EventService{
     AppState.activeEvent = event
   }
   async createEvent(eventData) {
-const response = await api.get('api/events', eventData)
+const response = await api.post('api/events', eventData)
 const event = new EventModel(response.data)
 AppState.events.unshift(event)
   }
