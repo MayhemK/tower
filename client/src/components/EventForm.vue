@@ -7,11 +7,11 @@ import { ref } from 'vue';
 
 const categories = ['concert', 'convention', 'sport', 'digital']
 const editableEventData = ref({
-  title: '',
+  name: '',
   description: '',
   startDate: '',
   coverImg: '',
-  category: '',
+  type: '',
   location: '',
   capacity: ''
 })
@@ -33,7 +33,7 @@ async function createEvent() {
 <template>
   <form @submit.prevent="createEvent()">
     <div class="form-floating mb-3">
-      <input v-model="editableEventData.title" type="text" class="form-control" id="eventTitle"
+      <input v-model="editableEventData.name" type="text" class="form-control" id="eventTitle"
         placeholder="Title of Event" minlength="3" maxlength="50" required>
       <label for="eventTitle">Title of Event</label>
     </div>
@@ -62,7 +62,7 @@ async function createEvent() {
       <label for="eventCoverImg">Event Image Link</label>
     </div>
     <div class="form-floating mb-3">
-      <select v-model="editableEventData.category" class="form-select" id="eventCategory" required>
+      <select v-model="editableEventData.type" class="form-select" id="eventCategory" required>
         <option value="" selected disabled>Choose a Category</option>
         <option v-for="category in categories" :key="'option' + category" :value="category" id="">
           {{ category }}
