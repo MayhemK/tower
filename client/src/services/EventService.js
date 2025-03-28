@@ -4,6 +4,9 @@ import { logger } from "@/utils/Logger.js"
 import {EventModel } from "@/models/Event.js"
 
 class EventService{
+  async createEvent(eventData) {
+const response = await api.get('api/events', eventData)
+  }
   async getEventById(eventId) {
     AppState.activeEvent = null
     const response = await api.get(`api/events/${eventId}`)

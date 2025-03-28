@@ -1,4 +1,6 @@
 <script setup>
+import EventForm from './EventForm.vue';
+
 
 </script>
 
@@ -12,13 +14,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <div>Name: text area</div>
-          <div>Start date: date entry</div>
-          <div>Tickets available</div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
+          <EventForm />
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-success">Create</button>
