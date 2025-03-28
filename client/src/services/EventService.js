@@ -8,7 +8,7 @@ class EventService{
   async cancelEvent(eventId) {
     const response = await api.delete(`api/events/${eventId}`)
     const event = new Event(response.data)
-    // AppState.activeEvent = event
+    AppState.activeEvent = event
   }
   async createEvent(eventData) {
 try {

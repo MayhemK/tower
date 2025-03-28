@@ -51,15 +51,18 @@ async function getEventById() {
               <div>
                 <div class="text-end">
                   <button class="btn btn-secondary">Edit</button>
-                  <button @onclick="cancelEvent()" v-if="event.creatorId == account?.id"
+                  <button @click="cancelEvent()" v-if="event.creatorId == account?.id"
                     class="btn btn-warning">Cancel</button>
                 </div>
-                <div>{{ event.name }} {{ event.type }}</div>
-                <div>{{ event.description }}</div>
-                <div v-if="event.isCanceled"> This event has been Cancelled</div>
-                <div v-else>Start Date: <p>{{ new Date(event.startDate).toLocaleString() }}</p>
+                <div class="fw-bold fs-3">{{ event.name }} <span class="fw-normal fs-5 ">{{ event.type }}</span></div>
+                <div class="fs-4">{{ event.description }}</div>
+                <div v-if="event.isCanceled" class="text-danger text-decoration-underline fw-bold fs-2"> This event has
+                  been
+                  Cancelled</div>
+                <div v-else class="fw-bold">Start Date: <p class="fw-normal">{{ new
+                  Date(event.startDate).toLocaleString() }}</p>
                 </div>
-                <div>Location: <p>{{ event.location }}</p>
+                <div class="fw-bold fs-4">Location: <p class="fw-normal fs-5">{{ event.location }}</p>
                 </div>
               </div>
               <div>
