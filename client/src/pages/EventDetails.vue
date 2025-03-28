@@ -12,7 +12,7 @@ onMounted(() => {
 })
 async function cancelEvent() {
   try {
-    const confirmed = await Pop.confirm(`Are you sure you want to cancel ${event.value.name}?`)
+    const confirmed = await Pop.confirm(`Are you sure you want to ${event.value.isCanceled ? 'reschedule' : 'cancel'} ${event.value.name}?`)
     if (!confirmed) {
       return
     }
@@ -50,9 +50,14 @@ async function getEventById() {
             <div class="col-8">
               <div>
                 <div class="text-end">
-                  <button class="btn btn-secondary">Edit</button>
-                  <button @click="cancelEvent()" v-if="event.creatorId == account?.id"
-                    class="btn btn-warning">Cancel</button>
+                  <div v-if="event.isCanceled">
+                    <button @click="cancelEvent()" v-if="event.creatorId == account?.id"
+                      class="btn btn-warning">Reschedule</button>
+                  </div>
+                  <div v-else>
+                    <button @click="cancelEvent()" v-if="event.creatorId == account?.id"
+                      class="btn btn-warning">Cancel</button>
+                  </div>
                 </div>
                 <div class="fw-bold fs-3">{{ event.name }} <span class="fw-normal fs-5 ">{{ event.type }}</span></div>
                 <div class="fs-4">{{ event.description }}</div>
@@ -108,4 +113,10 @@ async function getEventById() {
 </template>
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+img {
+  width: 100%;
+  height: 50dvh;
+  object-fit: cover;
+}
+</style>

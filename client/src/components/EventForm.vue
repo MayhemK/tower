@@ -4,6 +4,7 @@ import { logger } from '@/utils/Logger.js';
 import { Pop } from '@/utils/Pop.js';
 import { isCancel } from 'axios';
 import { ref } from 'vue';
+import { Modal } from 'bootstrap/dist/js/bootstrap.bundle.js';
 
 const categories = ['concert', 'convention', 'sport', 'digital']
 const editableEventData = ref({
@@ -21,6 +22,7 @@ async function createEvent() {
     console.log('submitting Data', editableEventData.value)
     await eventService.createEvent(editableEventData.value)
     logger.log(editableEventData.value);
+    Modal.getOrCreateInstance('#createModal').hide()
 
   }
   catch (error) {
