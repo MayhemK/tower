@@ -19,7 +19,7 @@ defineProps({
         <div class="text-capitalize">Type: {{ eventProp.type }}</div>
         <div class="text-success">Hosted by {{ eventProp.creatorId }}</div>
         <div>{{ new Date(eventProp.startDate).toLocaleDateString() }}</div>
-        <div>X/{{ eventProp.capacity }} Attending</div>
+        <div>{{ eventProp.ticketCount }} / {{ eventProp.capacity }} Attending</div>
       </div>
     </RouterLink>
   </div>

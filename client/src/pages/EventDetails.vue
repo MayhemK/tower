@@ -1,6 +1,7 @@
 <script setup>
 import { AppState } from '@/AppState.js'
 import { eventService } from '@/services/EventService.js'
+import { ticketService } from '@/services/TicketService.js'
 import { Pop } from '@/utils/Pop.js'
 import { computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
@@ -33,6 +34,15 @@ async function getEventById() {
   catch (error) {
     Pop.error('ERROR IS HERE', error);
 
+  }
+}
+
+async function getTicketsByEventId() {
+  try {
+    const eventId = route.params.eventId
+    await ticketService.getTicketsByEventId(eventId)
+  } catch (error) {
+    Pop.error(error)
   }
 }
 </script>
