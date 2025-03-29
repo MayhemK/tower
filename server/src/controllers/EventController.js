@@ -40,7 +40,8 @@ export class EventController extends BaseController {
   async cancelEvent(request, response, next) {
     try {
       const eventId = request.params.eventId
-      const event = await eventService.cancelEvent(eventId)
+      const userInfo = request.userInfo
+      const event = await eventService.cancelEvent(eventId, userInfo)
       response.send(event)
     } catch (error) {
       next(error)
