@@ -26,11 +26,11 @@ class EventService {
     return eventToUpdate
   }
   async getEventById(eventId) {
-    const event = await dbContext.Events.findById(eventId).populate('creator ticketCount ', 'name picture')
+    const event = await dbContext.Events.findById(eventId).populate('creator ticketCount', 'name picture')
     return event
   }
   async getAllEvents() {
-    const events = await dbContext.Events.find().populate('creator ticketCount ', ' name picture').populate('ticketCount').sort('-createdAt')
+    const events = await dbContext.Events.find().populate('creator ticketCount', 'name picture').sort('-createdAt')
     return events
   }
   async createEvent(eventData) {
