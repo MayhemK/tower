@@ -1,6 +1,7 @@
 <script setup>
 import { AppState } from '@/AppState.js'
 import CommentComp from '@/components/CommentComp.vue'
+import ReplyForm from '@/components/ReplyForm.vue'
 import { commentService } from '@/services/CommentService.js'
 import { eventService } from '@/services/EventService.js'
 import { ticketService } from '@/services/TicketService.js'
@@ -111,9 +112,16 @@ async function getCommentsByEventId() {
               <div>
                 <div class="mt-5">See what folks are saying...</div>
                 <div class="card">
-                  <div>join the conversation</div>
-                  <div>TEXT BOX</div>
-                  <button>BUTTON</button>
+
+                  <div class="fs-5 text-decoration-underline text-center">Join the Conversation!</div>
+                  <div v-if="account">
+                    <div v-if="!event.isCanceled">
+                      <ReplyForm />
+                    </div>
+                    <div v-else class="text-center fs-4 text-danger">Event has been Cancelled and Comments are disabled
+                    </div>
+                  </div>
+                  <div v-else class="text-center">Log In to Comment!</div>
                   <div v-if="replies.length > 0">
                     <div class="text-center fs-5 text-decoration-underline">Replies:</div>
                     <div v-for="reply in replies" :key="reply.id">
@@ -121,19 +129,24 @@ async function getCommentsByEventId() {
                     </div>
                   </div>
                   <div v-else>
-                    <div>Add to the conversation!</div>
+                    <div class="text-center">No comments!</div>
                   </div>
                 </div>
               </div>
             </div>
             <div class="col-4">
-              <div class="card">
-                <div> {{ event.ticketCount }} of {{ event.capacity }}</div>
-                <div>Interested in going?</div>
-                <div>Grab a ticket!</div>
-                <button @click="createTicket()" class="btn btn-primary-outline">Attend</button>
+              <div v-if="!event.isCanceled">
+                <div class="card">
+                  <div v-if="event.ticketCount < event.capacity">
+                    <div> {{ event.ticketCount }} of {{ event.capacity }}</div>
+                    <div>Interested in going?</div>
+                    <div>Grab a ticket!</div>
+                    <button @click="createTicket()" class="btn btn-primary">Attend</button>
+                  </div>
+                  <div v-else class="text-danger fs-3 fw-bold text-center">SOLD OUT</div>
+                </div>
+                <div>{{ event.capacity - event.ticketCount }} spots left</div>
               </div>
-              <div>X spots left</div>
               <div>
                 <div>Attendees</div>
                 <div class="card">
@@ -173,5 +186,10 @@ img {
 .profile {
   height: 32px;
   width: 32px;
+}
+
+hr {
+  color: blue;
+  height: 4px
 }
 </style>

@@ -4,6 +4,11 @@ import { AppState } from "@/AppState.js"
 import { Reply } from "@/models/Replies.js"
 
 class CommentService {
+  async createReply(replyData) {
+    const response = await api.post('api/comments', replyData)
+    const reply = new Reply(response.data)
+    AppState.replies.push(reply)
+  }
   async getCommentsByEventId(eventId) {
     const response = await api.get(`api/events/${eventId}/comments`)
     const replies = response.data.map(pojo => new Reply(pojo))
