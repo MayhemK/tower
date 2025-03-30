@@ -10,7 +10,7 @@ const account = computed(() => AppState.account)
 const event = computed(() => AppState.activeEvent)
 const route = useRoute()
 const ticketHolders = computed(() => AppState.ticketHolders)
-const replies = computed(() => AppState.comments)
+const replies = computed(() => AppState.replies)
 onMounted(() => {
   getEventById()
   getTicketsByEventId()

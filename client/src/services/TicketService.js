@@ -11,6 +11,7 @@ class TicketService {
     
     const ticket = new Ticket(response.data)
     AppState.ticketHolders.push(ticket)
+    AppState.activeEvent.ticketCount++
   }
   async getTicketsByEventId(eventId) {
     const response = await api.get(`/api/events/${eventId}/tickets`)
