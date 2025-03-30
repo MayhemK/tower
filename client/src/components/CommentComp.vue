@@ -1,10 +1,14 @@
 <script setup>
+import { Reply } from '@/models/Replies.js';
 
+defineProps({
+  reply: { type: Reply, required: true }
+})
 </script>
 
 
 <template>
-  Comments section
+  {{ reply.body }}
 </template>
 
 

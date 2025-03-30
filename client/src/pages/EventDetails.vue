@@ -1,5 +1,6 @@
 <script setup>
 import { AppState } from '@/AppState.js'
+import CommentComp from '@/components/CommentComp.vue'
 import { commentService } from '@/services/CommentService.js'
 import { eventService } from '@/services/EventService.js'
 import { ticketService } from '@/services/TicketService.js'
@@ -58,7 +59,6 @@ async function createTicket() {
   }
   catch (error) {
     Pop.error('create error', error);
-    console.log(error);
   }
 }
 
@@ -114,8 +114,10 @@ async function getCommentsByEventId() {
                   <div>join the conversation</div>
                   <div>TEXT BOX</div>
                   <button>BUTTON</button>
-                  <div>comment section
-                    {{ replies }}
+                  <div>Replies: {{ }}
+                  </div>
+                  <div v-for="reply in replies" :key="reply.id">
+                    <CommentComp :reply="reply" />
                   </div>
                 </div>
               </div>
