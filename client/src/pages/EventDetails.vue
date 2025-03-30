@@ -98,6 +98,7 @@ async function getCommentsByEventId() {
                 </div>
                 <div class="fw-bold fs-3">{{ event.name }} <span class="fw-normal fs-5 ">{{ event.type }}</span></div>
                 <div class="fs-4">{{ event.description }}</div>
+                <div class="text-capitalize">{{ event.creator.name }}</div>
                 <div v-if="event.isCanceled"
                   class=" text-center my-5 text-danger text-decoration-underline fw-bold fs-2">
                   This
@@ -148,13 +149,13 @@ async function getCommentsByEventId() {
                 <div>{{ event.capacity - event.ticketCount }} spots left</div>
               </div>
               <div>
-                <div>Attendees</div>
+                <div class="fs-4 text-decoration-underline">Attendees</div>
                 <div class="card">
                   <div class="container">
                     <div class="row">
                       <div class="col-12">
                         <hr>
-                        <div v-for="ticket in ticketHolders" :key="ticket.eventId">
+                        <div v-for="ticket in ticketHolders" :key="ticket.id">
                           <img class="profile" :src="ticket.profile.picture" :alt="ticket.profile.name">
                           <span>{{ ticket.profile.name }}</span>
                           <hr>

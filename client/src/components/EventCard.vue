@@ -17,7 +17,7 @@ defineProps({
         <img :src="eventProp.coverImg" alt="">
         <div class="fw-bold ">{{ eventProp.name }}</div>
         <div class="text-capitalize">Type: {{ eventProp.type }}</div>
-        <div class="text-success">Hosted by {{ eventProp.creatorId }}</div>
+        <div class="text-success">Hosted by {{ eventProp.creator.name }}</div>
         <div>{{ new Date(eventProp.startDate).toLocaleDateString() }}</div>
         <div>{{ eventProp.ticketCount }} / {{ eventProp.capacity }} Attending</div>
       </div>
