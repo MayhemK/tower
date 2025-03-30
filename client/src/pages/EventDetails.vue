@@ -10,7 +10,7 @@ const account = computed(() => AppState.account)
 const event = computed(() => AppState.activeEvent)
 const route = useRoute()
 const ticketHolders = computed(() => AppState.ticketHolders)
-const comments = computed(() => AppState.comments)
+const replies = computed(() => AppState.comments)
 onMounted(() => {
   getEventById()
   getTicketsByEventId()
@@ -114,7 +114,9 @@ async function getCommentsByEventId() {
                   <div>join the conversation</div>
                   <div>TEXT BOX</div>
                   <button>BUTTON</button>
-                  <div>{{ comments }}</div>
+                  <div>comment section
+                    {{ replies }}
+                  </div>
                 </div>
               </div>
             </div>
