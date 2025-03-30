@@ -114,10 +114,14 @@ async function getCommentsByEventId() {
                   <div>join the conversation</div>
                   <div>TEXT BOX</div>
                   <button>BUTTON</button>
-                  <div>Replies: {{ }}
+                  <div v-if="replies.length > 0">
+                    <div class="text-center fs-5 text-decoration-underline">Replies:</div>
+                    <div v-for="reply in replies" :key="reply.id">
+                      <CommentComp :reply="reply" />
+                    </div>
                   </div>
-                  <div v-for="reply in replies" :key="reply.id">
-                    <CommentComp :reply="reply" />
+                  <div v-else>
+                    <div>Add to the conversation!</div>
                   </div>
                 </div>
               </div>
