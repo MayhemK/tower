@@ -7,7 +7,7 @@ class CommentService {
   async createReply(replyData) {
     const response = await api.post('api/comments', replyData)
     const reply = new Reply(response.data)
-    AppState.replies.push(reply)
+    AppState.replies.unshift(reply)
   }
   async getCommentsByEventId(eventId) {
     const response = await api.get(`api/events/${eventId}/comments`)
