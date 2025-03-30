@@ -1,5 +1,6 @@
 <script setup>
 import { AppState } from '@/AppState.js'
+import { commentService } from '@/services/CommentService.js'
 import { eventService } from '@/services/EventService.js'
 import { ticketService } from '@/services/TicketService.js'
 import { Pop } from '@/utils/Pop.js'
@@ -8,8 +9,12 @@ import { useRoute } from 'vue-router'
 const account = computed(() => AppState.account)
 const event = computed(() => AppState.activeEvent)
 const route = useRoute()
+const ticketHolders = computed(() => AppState.ticketHolders)
+const comments = computed(() => AppState.comments)
 onMounted(() => {
   getEventById()
+  getTicketsByEventId()
+  getCommentsByEventId()
 })
 async function cancelEvent() {
   try {
@@ -42,7 +47,28 @@ async function getTicketsByEventId() {
     const eventId = route.params.eventId
     await ticketService.getTicketsByEventId(eventId)
   } catch (error) {
-    Pop.error(error)
+    Pop.error('this error', error)
+  }
+}
+
+async function createTicket() {
+  try {
+    const ticketData = { eventId: route.params.eventId }
+    await ticketService.createTicket(ticketData)
+  }
+  catch (error) {
+    Pop.error('create error', error);
+    console.log(error);
+  }
+}
+
+async function getCommentsByEventId() {
+  try {
+    const eventId = route.params.eventId
+    await commentService.getCommentsByEventId(eventId)
+  }
+  catch (error) {
+    Pop.error(error);
   }
 }
 </script>
@@ -88,15 +114,16 @@ async function getTicketsByEventId() {
                   <div>join the conversation</div>
                   <div>TEXT BOX</div>
                   <button>BUTTON</button>
-                  <div>COMMENT COMP</div>
+                  <div>{{ comments }}</div>
                 </div>
               </div>
             </div>
             <div class="col-4">
               <div class="card">
+                <div> {{ event.ticketCount }} of {{ event.capacity }}</div>
                 <div>Interested in going?</div>
                 <div>Grab a ticket!</div>
-                <button>Attend</button>
+                <button @click="createTicket()" class="btn btn-primary-outline">Attend</button>
               </div>
               <div>X spots left</div>
               <div>
@@ -105,7 +132,12 @@ async function getTicketsByEventId() {
                   <div class="container">
                     <div class="row">
                       <div class="col-12">
-                        <div>v-for attendees</div>
+                        <hr>
+                        <div v-for="ticket in ticketHolders" :key="ticket.eventId">
+                          <img class="profile" :src="ticket.profile.picture" :alt="ticket.profile.name">
+                          <span>{{ ticket.profile.name }}</span>
+                          <hr>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -128,5 +160,10 @@ img {
   width: 100%;
   height: 50dvh;
   object-fit: cover;
+}
+
+.profile {
+  height: 32px;
+  width: 32px;
 }
 </style>
