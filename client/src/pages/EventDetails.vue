@@ -96,9 +96,10 @@ async function getCommentsByEventId() {
                       class="btn btn-warning">Cancel</button>
                   </div>
                 </div>
-                <div class="fw-bold fs-3">{{ event.name }} <span class="fw-normal fs-5 ">{{ event.type }}</span></div>
+                <div class="fw-bold fs-3">{{ event.name }} <span class="fw-normal fs-5 ">{{ event.type
+                }}</span><span></span></div>
                 <div class="fs-4">{{ event.description }}</div>
-                <div class="text-capitalize">{{ event.creator.name }}</div>
+                <div class="text-capitalize fs-4 text-end">Hosted by: {{ event.creator.name }}</div>
                 <div v-if="event.isCanceled"
                   class=" text-center my-5 text-danger text-decoration-underline fw-bold fs-2">
                   This

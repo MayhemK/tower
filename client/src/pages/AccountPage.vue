@@ -37,27 +37,31 @@ async function deleteTicket(ticketId) {
 <template>
   <div class="about text-center">
     <div v-if="account">
-      <h1>Welcome {{ account.name }}</h1>
-      <img class="rounded" :src="account.picture" alt="" />
-      <p>{{ account.email }}</p>
-      <p>{{ ticketEvents.length }}</p>
-      <div v-for="ticket in ticketEvents" :key="ticket.id">
-        <div class="card">
-          <div class="component">
-            <RouterLink :to="{ name: 'EventDetails', params: { eventId: ticket.id } }"
-              :title="`Go to the ${ticket.event.name} page`">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-6">
+            <h1>Welcome {{ account.name }}</h1>
+            <img class="rounded" :src="account.picture" alt="" />
+            <p>{{ account.email }}</p>
+            <p>{{ ticketEvents.length }}</p>
+            <div v-for="ticket in ticketEvents" :key="ticket.id">
               <div class="card">
-                <img :src="ticket.event.coverImg" alt="">
-                <div class="fw-bold ">{{ ticket.event.name }}</div>
-                <div class="text-capitalize">Type: {{ ticket.event.type }}</div>
-                <div class="text-success">Hosted by {{ ticket.event.creatorId }}</div>
-                <div>{{ new Date(ticket.event.startDate).toLocaleDateString() }}</div>
+                <div class="component">
+                  <RouterLink :to="{ name: 'EventDetails', params: { eventId: ticket.eventId } }"
+                    :title="`Go to the ${ticket.event.name} page`">
+                    <div class="card">
+                      <img :src="ticket.event.coverImg" alt="">
+                      <div class="fw-bold ">{{ ticket.event.name }}</div>
+                      <div class="text-capitalize">Type: {{ ticket.event.type }}</div>
+                      <div>{{ new Date(ticket.event.startDate).toLocaleDateString() }}</div>
+                    </div>
+                  </RouterLink>
+                </div>
               </div>
-            </RouterLink>
+            </div>
           </div>
         </div>
       </div>
-      <div></div>
     </div>
     <div v-else>
       <h1>Loading... <i class="mdi mdi-loading mdi-spin"></i></h1>
@@ -67,6 +71,8 @@ async function deleteTicket(ticketId) {
 
 <style scoped lang="scss">
 img {
-  max-width: 100px;
+  width: 100%;
+  height: 35dvh;
+  object-fit: cover;
 }
 </style>
