@@ -78,6 +78,8 @@ async function getCommentsByEventId() {
     Pop.error(error);
   }
 }
+
+
 </script>
 
 
@@ -103,7 +105,7 @@ async function getCommentsByEventId() {
                   </div>
                 </div>
                 <div class="fw-bold fs-3">{{ event.name }} <span class="fw-normal fs-5 ">{{ event.type
-                    }}</span></div>
+                }}</span></div>
                 <div class="fs-4">{{ event.description }}</div>
                 <div class="text-capitalize fs-4 text-end">Hosted by: {{ event.creator.name }}</div>
                 <div v-if="event.isCanceled"
