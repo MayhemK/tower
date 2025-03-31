@@ -58,6 +58,7 @@ async function deleteTicket(ticketId) {
                   </RouterLink>
                 </div>
               </div>
+              <button @click="deleteTicket(ticket.id)" class="btn btn-danger">Leave Event</button>
             </div>
           </div>
         </div>

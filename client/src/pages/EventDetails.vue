@@ -10,6 +10,12 @@ import { computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 const account = computed(() => AppState.account)
 const event = computed(() => AppState.activeEvent)
+const isAttending = computed(() => {
+  if (!account.value || !event.value) {
+    return false;
+  }
+  return AppState.ticketHolders.some(ticket => ticket.accountId == account.value.id && ticket.eventId == event.value.id);
+})
 const route = useRoute()
 const ticketHolders = computed(() => AppState.ticketHolders)
 const replies = computed(() => AppState.replies)
@@ -97,7 +103,7 @@ async function getCommentsByEventId() {
                   </div>
                 </div>
                 <div class="fw-bold fs-3">{{ event.name }} <span class="fw-normal fs-5 ">{{ event.type
-                }}</span><span></span></div>
+                    }}</span></div>
                 <div class="fs-4">{{ event.description }}</div>
                 <div class="text-capitalize fs-4 text-end">Hosted by: {{ event.creator.name }}</div>
                 <div v-if="event.isCanceled"
@@ -148,6 +154,8 @@ async function getCommentsByEventId() {
                   <div v-else class="text-danger fs-3 fw-bold text-center">SOLD OUT</div>
                 </div>
                 <div>{{ event.capacity - event.ticketCount }} spots left</div>
+              </div>
+              <div v-if="isAttending" class="text-success fs-4 text-decoration-underline fw-bold">You are Attending
               </div>
               <div>
                 <div class="fs-4 text-decoration-underline">Attendees</div>
