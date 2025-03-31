@@ -1,12 +1,14 @@
 <script setup>
+import { AppState } from '@/AppState.js';
 import { Reply } from '@/models/Replies.js';
 import { commentService } from '@/services/CommentService.js';
 import { Pop } from '@/utils/Pop.js';
+import { computed } from 'vue';
 
 defineProps({
   reply: { type: Reply, required: true }
 })
-
+const account = computed(() => AppState.account)
 async function deleteReply(replyId) {
   try {
     const confirmed = await Pop.confirm('Do you want to delete your reply?')
@@ -30,9 +32,8 @@ async function deleteReply(replyId) {
       <div class="col-8">
         {{ reply.body }}
       </div>
-      <div v-if="{{ }}">
-        <div @click="deleteReply(reply.id)" class="col-2"><button class="btn btn-danger">🗑️</button></div>
-      </div>
+      <div @click="deleteReply(reply.id)" class="col-2"><button v-if="reply.creatorId == account.id"
+          class="btn btn-danger">🗑️</button></div>
     </div>
   </section>
 </template>
