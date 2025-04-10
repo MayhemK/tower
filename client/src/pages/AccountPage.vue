@@ -43,7 +43,7 @@ async function deleteTicket(ticketId) {
             <h1>Welcome {{ account.name }}</h1>
             <img class="rounded" :src="account.picture" alt="" />
             <p>{{ account.email }}</p>
-            <p>{{ ticketEvents.length }}</p>
+            <p>{{ ticketEvents.length }} events you are attending</p>
             <div v-for="ticket in ticketEvents" :key="ticket.id">
               <div class="card">
                 <div class="component">
@@ -73,7 +73,7 @@ async function deleteTicket(ticketId) {
 <style scoped lang="scss">
 img {
   width: 100%;
-  height: 35dvh;
+  height: 20dvh;
   object-fit: cover;
 }
 </style>
