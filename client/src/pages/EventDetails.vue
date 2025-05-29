@@ -38,6 +38,7 @@ async function cancelEvent() {
   }
 }
 
+
 async function getEventById() {
   try {
     const eventId = route.params.eventId
