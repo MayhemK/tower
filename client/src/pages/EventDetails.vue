@@ -8,6 +8,7 @@ import { ticketService } from '@/services/TicketService.js'
 import { Pop } from '@/utils/Pop.js'
 import { computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
+
 const account = computed(() => AppState.account)
 const event = computed(() => AppState.activeEvent)
 const isAttending = computed(() => {
@@ -19,11 +20,13 @@ const isAttending = computed(() => {
 const route = useRoute()
 const ticketHolders = computed(() => AppState.ticketHolders)
 const replies = computed(() => AppState.replies)
+
 onMounted(() => {
   getEventById()
   getTicketsByEventId()
   getCommentsByEventId()
 })
+
 async function cancelEvent() {
   try {
     const confirmed = await Pop.confirm(`Are you sure you want to ${event.value.isCanceled ? 'reschedule' : 'cancel'} ${event.value.name}?`)
